@@ -17,4 +17,16 @@ app.get("/character-search/:name", async (req, res, next) => {
   }
 });
 
+app.get("/overall-rankings", async (req, res, next) => {
+  try {
+    const { data } = await axios.get(
+      `https://www.nexon.com/api/maplestory/no-auth/v1/ranking/na?type=overall&id=legendary&reboot_index=2&page_index=1`
+    );
+
+    res.send(data);
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.listen(3000);
